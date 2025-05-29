@@ -70,8 +70,16 @@ pip install -r requirements.txt
 ```
 
 ### 5. Install ML Model from drive
+Windows
 ```bash
 bash download_model.sh
+```
+MacOs/Linux
+```bash
+chmod +x download_model.sh
+```
+```bash
+./download_model.sh
 ```
 
 ### 6. Apply Migrations
