@@ -1,0 +1,18 @@
+{%extends 'base.html' %}
+
+{%block content%}
+<div id="login-card" class="container col-sm-4 card" style="background-color: rgb(173, 173, 173); margin-top: 70px;">
+    <div class="card-body">
+        <h2 class="text-center mb-2">SignUp</h2>
+        <br>
+        <form action="{%url 'signup'%}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form.as_p}}
+            </div>
+            <button type="submit"class="btn btn-primary deep-purple btn-block ">SignUp</button>
+            <br>
+        </form>
+    </div>
+</div>
+{%endblock%}

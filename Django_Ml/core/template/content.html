@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{%if user.is_authenticated%}
+<div class="fail center" style="display: {{fail_display}};">
+    <h2>
+        <strong>Sorry!</strong> Not found Movie with keyword {{fail_name}}
+    </h2>
+    <h3>
+        Make sure you enter a correct name or check the spelling...
+    </h3>
+</div>
+<div class="maincontainer" id="ed" style="display: {{display}};">
+    <div class="movie-container">
+        <img src="{{img}}" class="movie-image">
+        <div class="movie-details">
+            <h2 class="movie-name"><strong>Movie Name: </strong>{{name}} </h2>
+            <p class="movie-status"><strong>Status: </strong>{{status}}</p>
+            <p class="movie-status"><strong>Original Language: </strong>{{lang}}</p>
+            <p class="movie-cast"><strong>Director: </strong>{{director}} </p>
+            <p class="movie-cast"><strong>Casting: </strong>{{cast}} </p>
+            <p class="movie-cast"><strong>Genres: </strong>{{genres}} </p>
+            <p class="movie-overview"><strong>Overview: </strong>{{overview}}</p>
+        </div>
+    </div>
+    <h3 class="h">If you like {{name}}</h3>
+    <section class="similar-movies">
+        {%for name,img in movie_data %}
+        <div class="col-sm-3">
+            <div class="card bg-custom p-3 mb-5 rounded  card-style">
+                <img src="{{ img }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <a style="text-decoration: none;" class="card-text text" href="{%url 'recommend_movie' name%}">
+                        <h6 style="color: black; font-weight: bold; text-overflow: inherit;">{{name}}</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </section>
+{%else%}
+<div id="login-card" class="container col-sm-4 card" style="background-color: rgb(173, 173, 173); margin-top: 70px;">
+    <div class="card-body">
+        <h2 class="text-center mb-2">Login</h2>
+        <br>
+        <form action="{%url 'home'%}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control"  placeholder="Enter Username" name="username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Enter password" name="password"required>
+            </div>
+            <button type="submit"class="btn btn-primary deep-purple btn-block ">Submit</button>
+            <br>
+        </form>
+    </div>
+</div>
+{%endif%}
+{%endblock%}
