@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.11, 3.12, 3.13]
-        os: [ubuntu-latest, window-latest, maxOs-latest]
-    runs-on: ${{ matrix.os }}
-    
+        
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -48,7 +48,7 @@ jobs:
   
   deploy:
     needs: build
-
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub
         run: |
