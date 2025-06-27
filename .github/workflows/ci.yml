@@ -27,6 +27,10 @@ jobs:
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Install model.pkl from google drive
+      run: |
+        chmod +x download_model.sh
+        ./download_model.sh
     - name: Run Tests
       run: |
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/
