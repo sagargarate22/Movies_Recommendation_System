@@ -24,10 +24,10 @@ jobs:
     - name: Install Dependencies
       run: |
         pwd
-        /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
         python -m pip install --upgrade pip
         pip install -r /requirements.txt
     - name: Run Tests
       run: |
-        /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/
         python /manage.py test
