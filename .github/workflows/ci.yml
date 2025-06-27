@@ -29,6 +29,7 @@ jobs:
         pip install -r requirements.txt
     - name: Install model.pkl from google drive
       run: |
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
         chmod +x download_model.sh
         ./download_model.sh
     - name: Run Tests
