@@ -29,7 +29,7 @@ jobs:
         pip install -r requirements.txt
     - name: Make directory for model
       run: |
-        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/stactic/
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/static/
         mkdir model
     - name: Install model.pkl from google drive
       run: |
