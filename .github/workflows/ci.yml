@@ -8,13 +8,14 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.11, 3.12, 3.13]
         os: [ubuntu-latest, window-latest, maxOs-latest]
-    runs-on: ${{ matrix.os }}
-    
+        
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
