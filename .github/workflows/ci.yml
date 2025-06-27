@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.11, 3.12, 3.13]
-
+        os: [ubuntu-latest, window-latest, maxOs-latest]
+    runs-on: ${{ matrix.os }}
+    
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -45,3 +45,15 @@ jobs:
       run: |
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/
         python manage.py test
+  
+  deploy:
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub
+        run: |
+          echo "Deploying to GitHub"
+          sleep 10
+          echo "Success"
+
+    
