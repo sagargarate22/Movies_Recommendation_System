@@ -26,8 +26,8 @@ jobs:
         pwd
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
         python -m pip install --upgrade pip
-        pip install -r /requirements.txt
+        pip install -r requirements.txt
     - name: Run Tests
       run: |
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/
-        python /manage.py test
+        python manage.py test
