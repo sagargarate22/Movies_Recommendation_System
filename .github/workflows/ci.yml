@@ -1,0 +1,47 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.11, 3.12, 3.13]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install Dependencies
+      run: |
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Make directory for model
+      run: |
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/static/
+        mkdir model
+        
+    - name: Install model.pkl from google drive
+      env:
+        FILE_ID: ${{ secrets.FILE_ID }}
+      run: |
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
+        chmod +x download_model.sh
+        ./download_model.sh
+        
+    - name: Run Tests
+      run: |
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/
+        python manage.py test
