@@ -21,20 +21,26 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        
     - name: Install Dependencies
       run: |
-        pwd
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        
     - name: Make directory for model
       run: |
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/static/
         mkdir model
+        
     - name: Install model.pkl from google drive
+      env:
+        FILE_ID: ${{ secrets.FILE_ID }}
       run: |
-        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/static/model
-        curl -L -o model.pkl  https://drive.google.com/file/d/1SrONtP3iiw_J2XtcZVXAsIFwpv0KsJ4u/view?usp=sharing
+        cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/
+        chmod +x download_model.sh
+        ./download_model.sh
+        
     - name: Run Tests
       run: |
         cd /home/runner/work/Movies_Recommendation_System/Movies_Recommendation_System/Django_Ml/core/
